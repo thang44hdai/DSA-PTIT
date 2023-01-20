@@ -4,21 +4,20 @@ using namespace std;
 #define ll long long
 
 int n;
-int a[15], b[15]; // 2 mảng chứa 2 đường chéo
-int x[15];        // x[i]=j là con hậu ở hàng i cột j
+int a[50], b[50], c[50];
 int cnt = 0;
 void Try(int i = 1)
 {
-    for (int j = 1; j <= n; j++) // xét các cột
+    for (int j = 1; j <= n; j++)
     {
-        if (x[j] == 0 and a[i + j - 1] == 0 and b[i - j + n] == 0)
+        if (!a[j] and !b[i + j - 1] and !c[i - j + n])
         {
-            x[j] = a[i + j - 1] = b[i - j + n] = 1;
+            a[j] = b[i + j - 1] = c[i - j + n] = 1;
             if (i == n)
                 cnt++;
             else
                 Try(i + 1);
-            x[j] = a[i + j - 1] = b[i - j + n] = 0;
+            a[j] = b[i + j - 1] = c[i - j + n] = 0;
         }
     }
 }
@@ -31,11 +30,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        fill(x, x + 15, 0);
-        fill(a, a + 15, 0);
-        fill(b, b + 15, 0);
         cin >> n;
-        cnt = 0;
         Try();
         cout << cnt << "\n";
     }

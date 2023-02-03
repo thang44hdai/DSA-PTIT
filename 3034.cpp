@@ -3,13 +3,7 @@
 using namespace std;
 #define ll long long
 
-int n;
-bool cmp(pair<int, int> a, pair<int, int> b)
-{
-    if (a.second != b.second)
-        return a.second < b.second;
-    return a.first < b.first;
-}
+int n, m, k;
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -19,24 +13,37 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n;
-        vector<pair<int, int>> vt;
-        while (n--)
+        cin >> n >> m >> k;
+        int a[n], b[m], c[k];
+        unordered_map<int, int> a1, b1, c1;
+        for (auto &i : a)
         {
-            int x, y;
-            cin >> x >> y;
-            vt.push_back({x, y});
+            cin >> i;
+            a1[i]++;
         }
-        sort(vt.begin(), vt.end(), cmp);
-        int cnt = 0;
-        int l = 0;
-        for (auto i : vt)
-            if (i.first >= l)
+        for (auto &i : b)
+        {
+            cin >> i;
+            b1[i]++;
+        }
+        for (auto &i : c)
+        {
+            cin >> i;
+            c1[i]++;
+        }
+        bool check = false;
+        for (auto i : a)
+            if (b1[i] and c1[i])
             {
-                l = i.second;
-                cnt++;
+                check = true;
+                int minLength = min({a1[i], b1[i], c1[i]});
+                for (int j = 1; j <= minLength; j++)
+                    cout << i << " ";
+                a1[i] = b1[i] = c1[i] = 0;
             }
-        cout << cnt << "\n";
+        if (!check)
+            cout << "NO";
+        cout << "\n";
     }
     return 0;
 }

@@ -4,6 +4,7 @@ using namespace std;
 #define ll long long
 
 string s;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -14,7 +15,8 @@ int main()
     while (t--)
     {
         cin >> s;
-        int dp[50] = {};
+        int n = s.length();
+        
         
     }
     return 0;

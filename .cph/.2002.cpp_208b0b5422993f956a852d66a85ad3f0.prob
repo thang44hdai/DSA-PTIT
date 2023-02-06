@@ -1,0 +1,1 @@
+{"name":"Local: 2002","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\2002.cpp","tests":[{"id":1675666670546,"input":"1\n5\n1 2 3 4 5","output":"[48] [20 28] [8 12 16] [3 5 7 9] [1 2 3 4 5]"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\2002.cpp","group":"local","local":true}

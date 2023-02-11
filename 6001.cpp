@@ -14,18 +14,21 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n >> m;
-        int a[n], b[m];
+        cin >> n;
+        int a[n];
         for (auto &i : a)
             cin >> i;
-        for (auto &i : b)
-            cin >> i;
-        int ans = 0;
-        for (auto i : a)
-            for (auto j : b)
-                if (j * log(i) > i * log(j))
-                    ans++;
-        cout << ans << "\n";
+        sort(a, a + n);
+        int l = 0, r = n - 1;
+        while (l <= r)
+        {
+            if (l != r)
+                cout << a[r] << " " << a[l] << " ";
+            else
+                cout << a[l] << " ";
+            l++, r--;
+        }
+        cout << "\n";
     }
     return 0;
 }

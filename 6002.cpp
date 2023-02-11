@@ -3,8 +3,11 @@
 #define ll long long
 using namespace std;
 
-int n, m;
-
+int n, x;
+bool cmp(int a, int b)
+{
+    return abs(a - x) < abs(b - x);
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -14,18 +17,14 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n >> m;
-        int a[n], b[m];
+        cin >> n >> x;
+        int a[n];
         for (auto &i : a)
             cin >> i;
-        for (auto &i : b)
-            cin >> i;
-        int ans = 0;
+        stable_sort(a, a + n, cmp);
         for (auto i : a)
-            for (auto j : b)
-                if (j * log(i) > i * log(j))
-                    ans++;
-        cout << ans << "\n";
+            cout << i << " ";
+        cout << "\n";
     }
     return 0;
 }

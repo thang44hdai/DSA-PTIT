@@ -3,7 +3,7 @@
 #define ll long long
 using namespace std;
 
-int n, m;
+int n, k;
 
 int main()
 {
@@ -14,18 +14,20 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n >> m;
-        int a[n], b[m];
+        cin >> n;
+        int a[n];
         for (auto &i : a)
             cin >> i;
-        for (auto &i : b)
-            cin >> i;
-        int ans = 0;
-        for (auto i : a)
-            for (auto j : b)
-                if (j * log(i) > i * log(j))
-                    ans++;
-        cout << ans << "\n";
+        sort(a, a + n);
+        int Min = a[0];
+        int i = 1;
+        while (i < n and a[i] == Min)
+            i++;
+        if (i == n)
+            cout << -1;
+        else
+            cout << a[0] << " " << a[i];
+        cout << "\n";
     }
     return 0;
 }

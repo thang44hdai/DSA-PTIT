@@ -3,8 +3,7 @@
 #define ll long long
 using namespace std;
 
-int n, m;
-
+int l, r;
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -14,18 +13,16 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n >> m;
-        int a[n], b[m];
+        cin >> l;
+        int a[l];
+        set<int> st;
         for (auto &i : a)
+        {
             cin >> i;
-        for (auto &i : b)
-            cin >> i;
-        int ans = 0;
-        for (auto i : a)
-            for (auto j : b)
-                if (j * log(i) > i * log(j))
-                    ans++;
-        cout << ans << "\n";
+            st.insert(i);
+        }
+        int n = *max_element(a, a + l) - *min_element(a, a + l) + 1;
+        cout << n - st.size() << "\n";
     }
     return 0;
 }

@@ -11,7 +11,7 @@ void sol()
         cout << -1 << "\n";
         return;
     }
-    cout<<ceil((float)(s*m)/n)<<""
+    cout << ceil((float)(s * m) / n) << "";
 }
 int main()
 {

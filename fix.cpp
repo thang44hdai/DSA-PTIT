@@ -1,49 +1,49 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#define ll long long
 using namespace std;
 
-int n;
-vector<int> a, b;
-set<vector<int>> ss;
-
-void Try(int i, int s) {
-    for (int j = i; j < n; ++j) {
-        b.push_back(a[j]);
-        s += a[j];
-        if (s % 2 == 1) {
-            vector<int> s(b.rbegin(), b.rend());
-            ss.insert(s);
-        }
-        if (j + 1 < n) Try(j + 1, s);
-        b.pop_back();
-        s -= a[j];
-    }
+int v, e, u, z;
+vector<int> vt[1005];
+int ok[1005];
+int Go[1005];
+void init()
+{
+    for (int i = 0; i <= v; i++)
+        vt[i].clear();
+    fill(ok, ok + 1005, 0);
 }
-
-void testCase() {
-    a.clear();
-    b.clear();
-    ss.clear();
-
-    cin >> n;
-    a.resize(n);
-    for (int &i : a) cin >> i;
-    sort(a.begin(), a.end());
-    Try(0, 0);
-    for (auto i : ss) {
-        for (auto j : i) {
-            cout << j << " ";
+void dfs(int x)
+{
+    ok[x] = 1;
+    cout << x << " ";
+    for (auto i : vt[x])
+        if (!ok[i])
+        {
+            Go[i] = x;
+            if()
+            dfs(i);
         }
-        cout << endl;
-    }
 }
-
-int main() {
+int main()
+{
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-
-    int T = 1; cin >> T;
-    while (T--) {
-        testCase();
+    cin.tie(0);
+    cout.tie(0);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        cin >> v >> e >> u >> z;
+        init();
+        while (e--)
+        {
+            int x, y;
+            cin >> x >> y;
+            vt[x].push_back(y);
+        }
+        dfs(u);
+        
         cout << "\n";
     }
     return 0;

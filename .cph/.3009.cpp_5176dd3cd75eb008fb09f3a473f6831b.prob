@@ -1,0 +1,1 @@
+{"name":"Local: 3009","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\3009.cpp","tests":[{"id":1676818753553,"input":"2\n4\n1 4 40\n2 1 30\n3 1 20\n4 4 20\n5\n1 2 100\n2 1 19\n3 2 27\n4 1 25\n5 1 15","output":"6 42"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\3009.cpp","group":"local","local":true}

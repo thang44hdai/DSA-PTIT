@@ -1,29 +1,55 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("Ofast")
-#define ll long long
+#pragma GCC optimze("Ofast")
 using namespace std;
+#define ll long long
 
-int v, e, u, z;
-vector<int> vt[1005];
-int ok[1005];
-int Go[1005];
-void init()
+int n;
+int a[15][15];
+vector<char> vt;
+bool check = false;
+
+void Try(int i = 1, int j = 1)
 {
-    for (int i = 0; i <= v; i++)
-        vt[i].clear();
-    fill(ok, ok + 1005, 0);
-}
-void dfs(int x)
-{
-    ok[x] = 1;
-    cout << x << " ";
-    for (auto i : vt[x])
-        if (!ok[i])
-        {
-            Go[i] = x;
-            if()
-            dfs(i);
-        }
+    if (i == n and j == n)
+    {
+        check = true;
+        for (auto i : vt)
+            cout << i;
+        cout << " ";
+        return;
+    }
+    if (i + 1 <= n and a[i + 1][j] == 1)
+    {
+        vt.push_back('D');
+        a[i + 1][j] = 0;
+        Try(i + 1, j);
+        vt.pop_back();
+        a[i + 1][j] = 1;
+    }
+    if (j - 1 >= 1 and a[i][j - 1] == 1)
+    {
+        vt.push_back('L');
+        a[i][j - 1] = 0;
+        Try(i, j - 1);
+        vt.pop_back();
+        a[i][j - 1] = 1;
+    }
+    if (j + 1 <= n and a[i][j + 1] == 1)
+    {
+        vt.push_back('R');
+        a[i][j + 1] = 0;
+        Try(i, j + 1);
+        vt.pop_back();
+        a[i][j + 1] = 1;
+    }
+    if (i - 1 >= 1 and a[i - 1][j] == 1)
+    {
+        vt.push_back('U');
+        a[i - 1][j] = 0;
+        Try(i - 1, j);
+        vt.pop_back();
+        a[i - 1][j] = 1;
+    }
 }
 int main()
 {
@@ -34,16 +60,19 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> v >> e >> u >> z;
-        init();
-        while (e--)
+        cin >> n;
+        check = false;
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= n; j++)
+                cin >> a[i][j];
+        if (a[1][1] == 0 or a[n][n] == 0)
+            cout << -1;
+        else
         {
-            int x, y;
-            cin >> x >> y;
-            vt[x].push_back(y);
+            Try();
+            if (!check)
+                cout << -1;
         }
-        dfs(u);
-        
         cout << "\n";
     }
     return 0;

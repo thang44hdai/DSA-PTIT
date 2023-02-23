@@ -1,79 +1,42 @@
 #include <bits/stdc++.h>
-#pragma GCC optimze("Ofast")
 using namespace std;
-#define ll long long
 
-int n;
-int a[15][15];
-vector<char> vt;
-bool check = false;
+void TestCase() {
+    int k; string s;
+    cin >> k >> s;
 
-void Try(int i = 1, int j = 1)
-{
-    if (i == n and j == n)
-    {
-        check = true;
-        for (auto i : vt)
-            cout << i;
-        cout << " ";
-        return;
-    }
-    if (i + 1 <= n and a[i + 1][j] == 1)
-    {
-        vt.push_back('D');
-        a[i + 1][j] = 0;
-        Try(i + 1, j);
-        vt.pop_back();
-        a[i + 1][j] = 1;
-    }
-    if (j - 1 >= 1 and a[i][j - 1] == 1)
-    {
-        vt.push_back('L');
-        a[i][j - 1] = 0;
-        Try(i, j - 1);
-        vt.pop_back();
-        a[i][j - 1] = 1;
-    }
-    if (j + 1 <= n and a[i][j + 1] == 1)
-    {
-        vt.push_back('R');
-        a[i][j + 1] = 0;
-        Try(i, j + 1);
-        vt.pop_back();
-        a[i][j + 1] = 1;
-    }
-    if (i - 1 >= 1 and a[i - 1][j] == 1)
-    {
-        vt.push_back('U');
-        a[i - 1][j] = 0;
-        Try(i - 1, j);
-        vt.pop_back();
-        a[i - 1][j] = 1;
-    }
-}
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        cin >> n;
-        check = false;
-        for (int i = 1; i <= n; i++)
-            for (int j = 1; j <= n; j++)
-                cin >> a[i][j];
-        if (a[1][1] == 0 or a[n][n] == 0)
-            cout << -1;
-        else
-        {
-            Try();
-            if (!check)
-                cout << -1;
+    for (int i = 0; i < s.length(); ++i) {
+        if (k == 0) break;
+        // Tìm char lớn nhất (lớn hơn s[i]) và đứng sau i
+        char c = '0';
+        for (int j = i + 1; j < s.length(); ++j) {
+            c = max(c, s[j]);
         }
-        cout << "\n";
+        if (c <= s[i]) continue;
+
+        string newz = s;
+        for (int j = i + 1; j < s.length(); ++j) {
+            // Nếu có nhiều char cùng bằng c, thử swap các TH và lấy TH max
+            if (s[j] == c) {
+                string temp = s;
+                swap(temp[i], temp[j]);
+                newz = max(newz, temp);
+            }
+        }
+        s = newz;
+        k--;
+    }
+    cout << s;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    int T; cin >> T;
+    while (T--) {
+        TestCase();
+        cout << endl;
     }
     return 0;
 }

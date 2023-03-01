@@ -3,8 +3,7 @@
 #define ll long long
 using namespace std;
 
-ll n, k;
-
+int n;
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -14,33 +13,26 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        ll a[n];
-        map<ll, ll> mp;
+        cin >> n;
+        int a[n];
         for (auto &i : a)
-        {
             cin >> i;
-            mp[i]++;
-        }
-        int cnt = 0;
-        for (auto i : mp)
-        {
-            if (mp[k - i.first])
-            {
-                if (i.first * 2 == k)
-                {
-                    cnt += (i.second - 1) * i.second / 2;
-                    i.second = 0;
-                }
-                else
-                {
-                    cnt += i.second * mp[k - i.first];
-                    mp[i.first] = 0;
-                    mp[k - i.first] = 0;
-                }
-            }
-        }
-        cout << cnt << "\n";
+        int up[n] = {1}, down[n];
+        for (int i = 1; i < n; i++)
+            if (a[i] > a[i - 1])
+                up[i] = up[i - 1] + 1;
+            else
+                up[i] = 1;
+        down[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--)
+            if (a[i] > a[i + 1])
+                down[i] = down[i + 1] + 1;
+            else
+                down[i] = 1;
+        int Max = 0;
+        for (int i = 0; i < n; i++)
+            Max = max(Max, up[i] + down[i]);
+        cout << Max - 1 << "\n";
     }
     return 0;
 }

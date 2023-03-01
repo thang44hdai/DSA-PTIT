@@ -5,6 +5,7 @@ using namespace std;
 
 string s;
 int k;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -20,7 +21,10 @@ int main()
         while (k-- and idx < n)
         {
             int i = max_element(s.begin() + idx, s.end()) - s.begin();
-            swap(s[idx++], s[i]);
+            int j = n - 1;
+            while (s[j] != s[i])
+                j--;
+            swap(s[idx++], s[j]);
         }
         cout << s << "\n";
     }

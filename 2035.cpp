@@ -1,54 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, k, ans;
-int hv[10], vs[10];
-string a[10], b[10];
-
-void solve() {
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < k; ++j) {
-            b[i][j] = a[i][hv[j]];
-        }
-    }
-    sort(b, b + n);
-    int minn = stoi(b[0]);
-    int maxx = stoi(b[n - 1]);
-    ans = min(ans, maxx - minn);
-}
-
-void Try(int i) {
-    for (int j = 0; j < k; ++j) {
-        if (!vs[j]) {
-            hv[i] = j;
-            vs[j] = 1;
-            if (i == k - 1) solve();
-            else Try(i + 1);
-            vs[j] = 0;
-        }
-    }
-}
-
-void testCase() {
-    cin >> n >> k;
-    ans = INT_MAX;
-    memset(vs, 0, sizeof(vs));
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        b[i] = a[i];
-    }
-    Try(0);
-    cout << ans;
-}
-
-int main() {
+int main()
+{
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-
-    int T = 1;
-    while (T--) {
-        testCase();
-        cout << "\n";
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n, k;
+    cin >> n >> k;
+    string s[n];
+    for (auto &i : s)
+        cin >> i;
+    int hv[k];
+    for (int i = 0; i < k; i++)
+        hv[i] = i + 1;
+    int Max = 999999999;
+    while (1)
+    {
+        vector<int> vt;
+        for (auto i : s)
+        {
+            int sum = 0;
+            for (auto j : hv)
+                sum = sum * 10 + i[j - 1] - '0';
+            vt.push_back(sum);
+        }
+        sort(vt.begin(), vt.end());
+        Max = min(Max, vt[n - 1] - vt[0]);
+        int idx = k - 2;
+        while (idx >= 0 and hv[idx] > hv[idx + 1])
+            idx--;
+        if (idx < 0)
+            break;
+        int x = k - 1;
+        while (hv[x] < hv[idx])
+            x--;
+        swap(hv[idx], hv[x]);
+        int l = idx + 1, r = k - 1;
+        while (l < r)
+            swap(hv[l++], hv[r--]);
     }
+    cout << Max;
     return 0;
 }

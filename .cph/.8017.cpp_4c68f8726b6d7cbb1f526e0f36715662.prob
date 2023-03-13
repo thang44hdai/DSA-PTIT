@@ -1,0 +1,1 @@
+{"name":"Local: 8017","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\8017.cpp","tests":[{"id":1678681896325,"input":"2\n2\n3","output":"88 86 68 66 8 6\n888 886 868 866 688 686 668 666 88 86 68 66 8 6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\8017.cpp","group":"local","local":true}

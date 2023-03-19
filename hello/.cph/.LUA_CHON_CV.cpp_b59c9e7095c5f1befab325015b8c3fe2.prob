@@ -1,0 +1,1 @@
+{"name":"Local: LUA_CHON_CV","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\hello\\LUA_CHON_CV.cpp","tests":[{"id":1679200882672,"input":"4\n0 20 35 10\n20 0 90 50\n35 90 0 12\n10 50 12 0","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\hello\\LUA_CHON_CV.cpp","group":"local","local":true}

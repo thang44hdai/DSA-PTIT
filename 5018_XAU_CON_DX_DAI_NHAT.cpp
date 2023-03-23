@@ -27,7 +27,7 @@ int main()
             {
                 int j = i + len - 1;
                 if (a[i] == a[j])
-                    if (i == j - 1)
+                    if (len == 2)
                         dp[i][j] = true;
                     else
                         dp[i][j] = dp[i + 1][j - 1];

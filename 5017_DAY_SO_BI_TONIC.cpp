@@ -24,8 +24,8 @@ int main()
             for (int j = 0; j < i; j++)
                 if (a[j] < a[i])
                     up[i] = max(up[i], up[j] + a[i]);
-        for (int i = n - 1; i >= 0; i--)
-            for (int j = n; j > i; j--)
+        for (int i = n - 2; i >= 0; i--)
+            for (int j = n - 1; j > i; j--)
                 if (a[j] < a[i])
                     down[i] = max(down[i], down[j] + a[i]);
         ll Max = 0;

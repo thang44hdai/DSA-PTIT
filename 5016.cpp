@@ -2,7 +2,7 @@
 #pragma GCC optimize("Ofast")
 #define ll long long
 using namespace std;
-ll m = 1e9 + 7;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -12,17 +12,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        ll n, k;
-        cin >> n >> k;
-        ll mul = 1;
-        ll st = n, e = n - k + 1;
-        while (st >= e)
-        {
-            mul = (mul * st) % m;
-            st--;
-        }
-        cout << mul << "\n";
+        
     }
-
     return 0;
 }

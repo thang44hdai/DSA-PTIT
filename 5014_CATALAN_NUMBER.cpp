@@ -3,6 +3,16 @@
 #define ll long long
 using namespace std;
 
+ll c[105] = {};
+void init()
+{
+    c[0] = 1;
+    c[1] = 1;
+    c[2] = 2;
+    for (int i = 3; i <= 100; i++)
+        for (int j = 0; j < i; j++)
+            c[i] += c[j] * c[i - j - 1];
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -10,19 +20,12 @@ int main()
     cout.tie(0);
     int t;
     cin >> t;
+    init();
     while (t--)
     {
         int n;
         cin >> n;
-        int dp[n + 1];
-        dp[0] = 0;
-        for (int i = 1; i <= n; i++)
-        {
-            dp[i] = 1e9;
-            for (int j = 1; j * j <= i; j++)
-                dp[i] = min(dp[i], dp[i - j * j] + 1);
-        }
-        cout << dp[n] << endl;
+        cout << c[n] << "\n";
     }
     return 0;
 }

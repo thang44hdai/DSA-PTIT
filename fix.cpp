@@ -11,14 +11,27 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n;
-        vt.clear();
-        sol();
-        reverse(vt.begin(), vt.end());
-        for (auto i : vt)
-            cout << i;
-        if (vt.empty())
-            cout << -1;
-        cout << "\n";
+        string s;
+        cin >> s;
+        int n = s.length();
+        bool dp[n + 1][n + 1] = {};
+        // memset(dp, false, sizeof(dp));
+        int ans = INT_MIN;
+        for (int i = n - 1; i >= 0; i--)
+            for (int j = i; j < n; j++)
+            {
+                if (i == j)
+                    dp[i][j] = true;
+                else if (s[i] == s[j])
+                {
+                    if (j == i + 1)
+                        dp[i][j] = true;
+                    else
+                        dp[i][j] = dp[i + 1][j - 1];
+                }
+                ans = max(ans, j - i + 1);
+            }
+        cout << ans << "\n";
     }
+    return 0;
 }

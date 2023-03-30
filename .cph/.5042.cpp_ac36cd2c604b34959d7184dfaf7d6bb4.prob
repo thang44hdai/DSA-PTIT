@@ -1,0 +1,1 @@
+{"name":"Local: 5042","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\5042.cpp","tests":[{"id":1679915266903,"input":"3\n\n6 3\n\n1 4 20 3 10 5\n\n7 7\n\n1 4 0 0 3 10 5\n\n2 0\n\n1 4","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\5042.cpp","group":"local","local":true}

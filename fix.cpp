@@ -1,39 +1,54 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("Ofast")
-#define ll long long
 using namespace std;
+int a[1005][1005];
+int c[1005][1005] = {};
 
+int xuly(int n, int m)
+{
+    memset(c, 9999, sizeof(c));
+    int i, j;
+    queue<pair<int, int>> q;
+    q.push({1, 1});
+    c[1][1] = 0;
+    while (!q.empty())
+    {
+        auto t = q.front();
+        i = t.first;
+        j = t.second;
+        int x = a[i][j];
+        q.pop();
+        if (j + x <= m and a[i][j + x])
+        {
+            q.push({i, j + x});
+            c[i][j + x] = min(c[i][j + x], c[i][j] + 1);
+        }
+        if (i + x <= n and a[i + x][j])
+        {
+            q.push({i + x, j});
+            c[i + x][j] = min(c[i + x][j], c[i][j] + 1);
+        }
+        a[i][j] = 0;
+    }
+    if (a[n][m] == 0)
+        return c[n][m];
+    return -1;
+}
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
     int t;
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        pair<ll, ll> p[n];
-        for (auto &i : p)
-            cin >> i.first >> i.second;
-        ll dp[n + 1][2] = {};
-        dp[0][1] = p[0].second;
-        for (int i = 1; i < n; i++)
+        
+        int n, m;
+        cin >> n >> m;
+        for (int i = 1; i <= n; i++)
         {
-            if (p[i].first == p[i - 1].first)
+            for (int j = 1; j <= m; j++)
             {
-                dp[i][1] = min(dp[i - 1][0], dp[i - 1][1]) + p[i].second;
-                dp[i][0] = dp[i - 1][1];
-            }
-            else
-            {
-                dp[i][0] = min(dp[i - 1][0], dp[i - 1][1]);
-                dp[i][1] = min(dp[i - 1][0], dp[i - 1][1]) + p[i].second;
+                cin >> a[i][j];
             }
         }
-        cout << min(dp[n - 1][0], dp[n - 1][1]) << "\n";
-        
+        cout << xuly(n, m) << "\n";
     }
-    return 0;
 }

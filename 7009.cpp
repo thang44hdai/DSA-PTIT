@@ -2,7 +2,6 @@
 #pragma GCC optimize("Ofast")
 #define ll long long
 using namespace std;
-
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -14,25 +13,23 @@ int main()
     {
         string s;
         cin >> s;
+        string ans = 0;
         stack<char> st;
-        int cnt = 0;
-        for (auto i : s)
+        reverse(s.begin(), s.end());
+        for (char i : s)
         {
-            if (i == '(')
+            if (isalpha(i))
                 st.push(i);
             else
             {
-                if (st.size())
-                    st.pop();
-                else
-                {
-                    st.push('(');
-                    cnt++;
-                }
+                char x = st.top();
+                st.pop();
+                char y = st.top();
+                st.pop();
+                ans = "(" + to_string(x) + i + to_string(y) + ")" + ans;
             }
         }
-        cout << cnt + st.size() / 2 << "\n";
+        cout << ans << "\n";
     }
-
     return 0;
 }

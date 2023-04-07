@@ -15,7 +15,7 @@ int main()
     while (t--)
     {
         cin >> n >> k;
-        ll dp[n + 5] = {};
+        ll dp[n + 5] ={};
         dp[0] = 1;
         for (int i = 1; i <= n; i++)
             if (i > k)

@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("Ofast")
-#define ll long long
+#pragma GCC Optimize("Ofast")
 using namespace std;
 int main()
 {
@@ -13,7 +12,6 @@ int main()
     {
         string s;
         cin >> s;
-        string ans = "";
         stack<string> st;
         reverse(s.begin(), s.end());
         for (char i : s)
@@ -26,11 +24,13 @@ int main()
                 st.pop();
                 string se = st.top();
                 st.pop();
-                string tmp = "(" + fi + i + se + ")";
+                string tmp = fi + se + i;
                 st.push(tmp);
             }
         }
         cout << st.top() << "\n";
     }
+    
+    
     return 0;
 }

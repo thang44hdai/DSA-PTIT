@@ -11,23 +11,28 @@ int main()
     cin >> t;
     while (t--)
     {
-        string s;
-        cin >> s;
-        stack<string> st;
-        for (char i : s)
+        int n;
+        cin >> n;
+        int a[n];
+        for (int &i : a)
+            cin >> i;
+        stack<pair<int, int>> st;
+        vector<int> vt;
+        vt.push_back(1);
+        st.push({a[0], 1});
+        for (int i = 1; i < n; i++)
         {
-            if (i == '+' or i == '-' or i == '*' or i == '/')
-            {
-                string fi = st.top();
+            while (st.size() and a[i] >= st.top().first)
                 st.pop();
-                string se = st.top();
-                st.pop();
-                st.push(i + se + fi);
-            }
+            if (st.size())
+                vt.push_back(i + 1 - st.top().second);
             else
-                st.push(string(1, i));
+                vt.push_back(i + 1);
+            st.push({a[i], i + 1});
         }
-        cout << st.top() << "\n";
+        for (auto i : vt)
+            cout << i << " ";
+        cout << "\n";
     }
     return 0;
 }

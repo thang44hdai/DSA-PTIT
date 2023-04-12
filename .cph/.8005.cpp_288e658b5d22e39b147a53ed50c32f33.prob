@@ -1,0 +1,1 @@
+{"name":"Local: 8005","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\8005.cpp","tests":[{"id":1681281926317,"input":"2\n2\n14","output":"1 10 \n1 10 11 100 101 110 111 1000 1001 1010 1011 1100 1101 1110"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\8005.cpp","group":"local","local":true}

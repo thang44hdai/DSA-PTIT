@@ -1,55 +1,56 @@
-#include <iostream>
-#include <stack>
-#include <queue>
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#define ll long long
 using namespace std;
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     int t;
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        queue<int> X;
-        while (n--)
+        string s;
+        cin >> s;
+        stack<string> st;
+        for (char i : s)
         {
-            int a;
-            cin >> a;
-            if (a == 1)
-                cout << X.size() << endl;
-            if (a == 2)
+            if (i == '(')
+                st.push(string(1, i));
+            else if (i == ')')
             {
-                if (X.empty())
-                    cout << "YES\n";
+                if (st.size() >= 2)
+                {
+                    string fi = st.top();
+                    st.pop();
+                    string se = st.top();
+                    st.pop();
+                    string tmp = "0" + fi + "1";
+                    st.push(tmp);
+                }
                 else
-                    cout << "NO\n";
+                {
+                    string fi = st.top();
+                    st.pop();
+                    st.push(fi + "-1");
+                }
             }
-            if (a == 3)
+            else
             {
-                int b;
-                cin >> b;
-                X.push(b);
-            }
-            if (a == 4)
-            {
-                if (X.size())
-                    X.pop();
-            }
-            if (a == 5)
-            {
-                if (X.empty())
-                    cout << -1 << endl;
-                else
-                    cout << X.front() << endl;
-            }
-            if (a == 6)
-            {
-                if (X.empty())
-                    cout << -1 << endl;
-                else
-                    cout << X.back() << endl;
+                string tmp = string(1, i);
+                while (st.size() and st.top() != "(")
+                {
+                    tmp += st.top();
+                    st.pop();
+                }
+                st.push(tmp);
             }
         }
+        for (int i = 1; i < st.size(); i++)
+            cout << "-1";
+        cout << st.top() << "\n";
     }
+    return 0;
 }

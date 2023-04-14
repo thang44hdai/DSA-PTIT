@@ -8,33 +8,28 @@ string sol(string s)
     stack<char> st;
     for (char i : s)
     {
-        if (i == '(' or i == '{' or i == '[')
+        if (i != '(' and i != ')' and i != '[' and i != ']')
+            continue;
+        if (i == '(' or i == '[')
             st.push(i);
         else if (i == ')')
         {
             if (st.size() and st.top() == '(')
                 st.pop();
             else
-                return "false";
+                return "NO";
         }
         else if (i == ']')
         {
             if (st.size() and st.top() == '[')
                 st.pop();
             else
-                return "false";
-        }
-        else if (i == '}')
-        {
-            if (st.size() and st.top() == '{')
-                st.pop();
-            else
-                return "false";
+                return "NO";
         }
     }
     if (st.size())
-        return "false";
-    return "true";
+        return "NO";
+    return "YES";
 }
 int main()
 {
@@ -43,10 +38,11 @@ int main()
     cout.tie(0);
     int t;
     cin >> t;
+    cin.ignore();
     while (t--)
     {
         string s;
-        cin >> s;
+        getline(cin, s);
         cout << sol(s) << "\n";
     }
     return 0;

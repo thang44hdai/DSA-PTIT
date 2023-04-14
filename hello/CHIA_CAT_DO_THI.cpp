@@ -1,12 +1,17 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
 using namespace std;
-
 #define ll long long
 
-int t, n, m;
+int n, m;
 vector<int> ke[1000001];
 int vs[1000001];
-
+void init()
+{
+    fill(vs, vs + n + 5, 0);
+    for (int i = 1; i <= n; i++)
+        ke[i].clear();
+}
 void DFS(int u)
 {
     vs[u] = 1;
@@ -16,15 +21,28 @@ void DFS(int u)
             DFS(x);
     }
 }
+int dem()
+{
+    int cnt = 0;
+    for (int i = 1; i <= n; i++)
+        if (!vs[i])
+        {
+            cnt++;
+            DFS(i);
+        }
+    return cnt;
+}
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    int t;
     cin >> t;
     while (t--)
     {
         cin >> n >> m;
+        init();
         for (int i = 0; i < m; i++)
         {
             int x, y;
@@ -32,49 +50,24 @@ int main()
             ke[x].push_back(y);
             ke[y].push_back(x);
         }
-        int tplt = 0;
-        for (int i = 1; i <= n; i++)
-        {
-            if (!vs[i])
-            {
-                tplt++;
-                DFS(i);
-            }
-        }
+        int tplt = dem();
         int ans = 0;
-        int pos = 0;
         int ok = 0;
         for (int i = 1; i <= n; i++)
         {
+            fill(vs, vs + n + 5, 0);
             vs[i] = 1;
-            int dem = 0;
-            for (int j = 1; j <= n; j++)
-            {
-                if (!vs[j])
-                {
-                    dem++;
-                    DFS(j);
-                }
-            }
-            if (dem > tplt)
+            int cnt = dem();
+            if (cnt > tplt)
             {
                 ok = 1;
-                if (ans < dem)
-                {
-                    ans = dem;
-                    pos = i;
-                }
+                ans = i;
             }
-            memset(vs, false, sizeof(vs));
         }
         if (ok)
-            cout << pos << endl;
+            cout << ans << "\n";
         else
-            cout << 0 << endl;
-        memset(vs, false, sizeof(vs));
-        for (int i = 1; i <= n; i++)
-            ke[i].clear();
-        
+            cout << 0 << "\n";
     }
     return 0;
 }

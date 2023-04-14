@@ -12,15 +12,14 @@ int main()
     while (t--)
     {
         string s;
-        cin >> s;
-        stack<string> st;
-        for (char i : s)
-            if(i!='(' and i!=')')
-                st.push(string(1, i));
-        while(st.size()>1)
+        cin>>s;
+        stack<char> st;
+        for(char i: s)
         {
+            st.push(i);
             
         }
+
     }
     return 0;
 }

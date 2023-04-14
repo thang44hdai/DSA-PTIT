@@ -10,47 +10,47 @@ int main()
     cout.tie(0);
     int t;
     cin >> t;
+    cin.ignore();
     while (t--)
     {
         string s;
-        cin >> s;
-        stack<string> st;
+        getline(cin, s);
+        stack<char> tru, cong, dau_ngoac; //  để check
+        vector<char> kq;                  // để lưu kết quả
         for (char i : s)
         {
+            if (i == ' ')
+                continue;
             if (i == '(')
-                st.push(string(1, i));
+            {
+                if (tru.size())
+                {
+                    dau_ngoac.push(i);
+                    kq.push_back(i);
+                }
+            }
             else if (i == ')')
             {
-                if (st.size() >= 2)
+                if (dau_ngoac.size())
                 {
-                    string fi = st.top();
-                    st.pop();
-                    string se = st.top();
-                    st.pop();
-                    string tmp = "0" + fi + "1";
-                    st.push(tmp);
+                    kq.push_back(i);
+                    dau_ngoac.pop();
                 }
-                else
-                {
-                    string fi = st.top();
-                    st.pop();
-                    st.push(fi + "-1");
-                }
+            }
+            else if (i == '+')
+            {
+                kq.push_back(i);
+                cong.push(i);
+            }
+            else if (i == '-')
+            {
+                tru.push(i);
+                kq.push_back(i);
             }
             else
-            {
-                string tmp = string(1, i);
-                while (st.size() and st.top() != "(")
-                {
-                    tmp += st.top();
-                    st.pop();
-                }
-                st.push(tmp);
-            }
+                kq.push_back(i);
         }
-        for (int i = 1; i < st.size(); i++)
-            cout << "-1";
-        cout << st.top() << "\n";
+        
     }
     return 0;
 }

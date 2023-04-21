@@ -1,59 +1,52 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
 using namespace std;
 #define ll long long
 ll n, x;
-set<vector<ll>> ans;
+ll a[50];
 vector<ll> vt;
-vector<ll>a;
-bool check=false;
-void Try(int i=0, ll sum=0)
+set<vector<ll>> ans;
+void Try(int j = 1, ll sum = 0)
 {
-	if(sum>x)
+	if (sum > x)
 		return;
-	if(sum==x)
+	if (sum == x)
 	{
-		vector<ll> b(vt);
-		sort(b.begin(), b.end());
-		ans.insert(b);
-		check=true;
+		ans.insert(vt);
 		return;
 	}
-	for(int j=i;j<n;j++)
+	for (int i = j; i <= n; i++)
 	{
-		vt.push_back(a[j]);	
-		Try(j, sum+a[j]);
+		vt.push_back(a[i]);
+		Try(i, sum + a[i]);
 		vt.pop_back();
 	}
-	
 }
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
 	int t;
-	cin>>t;
-	while(t--)
+	cin >> t;
+	while (t--)
 	{
-		a.clear();
-		ans.clear();
-		check=false;
-		cin>>n>>x;
-		int m=n;
-		while(m--)
-		{
-			ll k;
-			cin>>k;
-			a.push_back(k);
-		}
+		cin >> n >> x;
+		for (int i = 1; i <= n; i++)
+			cin >> a[i];
+		sort(a+1, a+n+1);
 		Try();
-		for(auto i: ans)
+		for (auto i : ans)
 		{
-			cout<<"[";
-			for(int j=0;j<i.size()-1;j++)
-				cout<<i[j]<<" ";
-			cout<<i[i.size()-1]<<"] ";
+			cout << '[';
+			for (int j = 0; j < i.size() - 1; j++)
+				cout << i[j] << " ";
+			cout << i[i.size() - 1] << ']';
 		}
-		if(!check)
-			cout<<-1;
-		cout<<endl;
+		if (ans.size() == 0)
+			cout << -1;
+		ans.clear();
+		cout << "\n";
 	}
 	return 0;
 }

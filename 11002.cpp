@@ -16,7 +16,7 @@ struct Node
         this->right = NULL;
     }
 };
-Node *buildTree(Node *root, int i=0)
+Node *buildTree(Node *&root, int i = 0)
 {
     if (i < n)
     {

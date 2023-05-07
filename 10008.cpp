@@ -4,35 +4,33 @@
 using namespace std;
 
 int v, e, u;
-vector<pair<ll, int>> vt[105];
-int d[105] = {};
-priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> pq;
-void Dijkstra(int u)
+ll d[1005];
+int a[1005][1005];
+int vs[1005];
+void dijkstra()
 {
-    d[u] = 0;
-    pq.push({d[u], u});
-    while (!pq.empty())
+    for (int i = 1; i <= v; i++)
+        d[i] = a[u][i];
+    d[u] = 0, vs[u] = 1;
+    while (1)
     {
-        pair<ll, int> top = pq.top();
-        pq.pop();
-        if (top.first > d[top.second])
-            continue;
-        for (auto i : vt[top.second])
-        {
-            if (d[i.second] > d[top.second] + i.first)
+        u = 0;
+        int Min = 1e9;
+        for (int i = 1; i <= v; i++)
+            if (!vs[i] and d[i] < Min)
             {
-                d[i.second] = d[top.second] + i.first;
-                pq.push({d[i.second], i.second});
+                u = i;
+                Min = d[i];
             }
-        }
+        if (u == 0)
+            break;
+        vs[u] = 1;
+        for (int i = 1; i <= v; i++)
+            if (vs[i] == 0 and d[i] > d[u] + a[u][i])
+                d[i] = d[u] + a[u][i];
     }
     for (int i = 1; i <= v; i++)
-    {
-        if (d[i] != 1e9)
-            cout << d[i] << " ";
-        else
-            cout << -1 << " ";
-    }
+        cout << d[i] << " ";
     cout << "\n";
 }
 int main()
@@ -44,18 +42,19 @@ int main()
     cin >> t;
     while (t--)
     {
-        fill(d, d + 105, 1e9);
         cin >> v >> e >> u;
+        for (int i = 1; i <= v; i++)
+            for (int j = 1; j <= v; j++)
+                a[i][j] = 1e9;
         while (e--)
         {
             int x, y, z;
             cin >> x >> y >> z;
-            vt[x].push_back({z, y});
+            a[x][y] = min(a[x][y], z);
+            a[y][x] = a[x][y];
         }
-
-        Dijkstra(u);
-        for (int i = 1; i <= v; ++i)
-            vt[i].clear();
+        fill(vs, vs + v + 5, 0);
+        dijkstra();
     }
 
     return 0;

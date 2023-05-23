@@ -1,118 +1,82 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("Ofast")
-#define ll long long
 using namespace std;
 
-int n;
-string sol()
+using ll = long long;
+const int mod = 1e9 + 7;
+vector<int> adj[10005];
+int deg[10005];
+int idx;
+bool kahn()
 {
-    cin >> n;
-    string a, b, c;
-    unordered_map<string, int> dd;
-    deque<string> dq;
-    for (int i = 1; i <= n; i++)
+    queue<int> q;
+    for (int i = 1; i <= idx; i++)
     {
-        cin >> a >> b >> c;
-        if (dd[a] == 0 and dd[c] == 0)
+        if (deg[i] == 0)
         {
-            dd[a] = dd[c] = 1;
-            if (b == ">")
-            {
-                dq.push_back(a);
-                dq.push_front(c);
-            }
-            else
-            {
-                dq.push_back(c);
-                dq.push_front(a);
-            }
-        }
-        else if (dd[a] == 0 and dd[c] == 1)
-        {
-            if (b == ">")
-            {
-                stack<string> st;
-                while (dq.size() and dq.front() != c)
-                {
-                    st.push(dq.front());
-                    dq.pop_front();
-                }
-                dq.pop_front();
-                dq.push_front(a);
-                dq.push_front(c);
-                while (st.size())
-                {
-                    dq.push_front(st.top());
-                    st.pop();
-                }
-            }
-            else
-            {
-                stack<string> st;
-                while (dq.size() and dq.back() != c)
-                {
-                    st.push(dq.back());
-                    dq.pop_front();
-                }
-                dq.pop_back();
-                dq.push_back(a);
-                dq.push_back(c);
-                while (st.size())
-                {
-                    dq.push_back(st.top());
-                    st.pop();
-                }
-            }
-        }
-        else
-        {
-            if (b == ">")
-            {
-                stack<string> st;
-                while (dq.size() and dq.front() != c)
-                {
-                    st.push(dq.front());
-                    dq.pop_front();
-                }
-                if (st.top() == a)
-                    return "impossible";
-                else
-                {
-                    while (st.size())
-                    {
-                        dq.push_front(st.top());
-                        st.pop();
-                    }
-                }
-            }
-            else
-            {
-                stack<string> st;
-                while (dq.size() and dq.back() != c)
-                {
-                    st.push(dq.back());
-                    dq.pop_front();
-                }
-                if (st.top() == a)
-                    return "impossible";
-                else
-                {
-                    while (st.size())
-                    {
-                        dq.push_back(st.top());
-                        st.pop();
-                    }
-                }
-            }
+            q.push(i);
         }
     }
-    return "possible";
+    vector<int> topo;
+    while (!q.empty())
+    {
+        int v = q.front();
+        q.pop();
+        topo.push_back(v);
+        for (int x : adj[v])
+        {
+            deg[x]--;
+            if (deg[x] == 0)
+                q.push(x);
+        }
+    }
+    if ((int)topo.size() < idx)
+        return true;
+    return false;
 }
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    cout << sol();
-    return 0;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int n;
+    cin >> n;
+    map<string, int> mp;
+    idx = 1;
+    cin.ignore();
+    while (n--)
+    {
+        string s;
+        getline(cin, s);
+        stringstream ss(s);
+        string tmp;
+        vector<string> v;
+        while (ss >> tmp)
+        {
+            v.push_back(tmp);
+        }
+        if (!mp[v[0]])
+        {
+            mp[v[0]] = idx;
+            idx++;
+        }
+        if (!mp[v[2]])
+        {
+            mp[v[2]] = idx;
+            idx++;
+        }
+        if (v[1] == ">")
+        {
+            adj[mp[v[0]]].push_back(mp[v[2]]);
+            deg[mp[v[2]]]++;
+        }
+        else
+        {
+            adj[mp[v[2]]].push_back(mp[v[0]]);
+            deg[mp[v[0]]]++;
+        }
+    }
+    if (kahn())
+        cout << "impossible" << endl;
+    else
+        cout << "possible" << endl;
 }

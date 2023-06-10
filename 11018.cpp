@@ -17,10 +17,8 @@ struct Node
 typedef Node *node;
 void buildTree(node &root, int x)
 {
-   if (!root)
-   {
+   if (root == NULL)
       root = new Node(x);
-   }
    else
    {
       if (root->val > x)
@@ -29,20 +27,13 @@ void buildTree(node &root, int x)
          buildTree(root->right, x);
    }
 }
-bool check_leaf(node root)
-{
-   return (root->left == NULL and root->right == NULL);
-}
-void sol(node root, int &cnt)
+void preOrder(node root)
 {
    if (root)
    {
-      if (!check_leaf(root))
-         cnt++;
-      if (root->left)
-         sol(root->left, cnt);
-      if (root->right)
-         sol(root->right, cnt);
+      cout << root->val << " ";
+      preOrder(root->left);
+      preOrder(root->right);
    }
 }
 int main()
@@ -56,16 +47,15 @@ int main()
    {
       int n;
       cin >> n;
-      node root = NULL;
-      while (n--)
+      node root=NULL;
+      while(n--)
       {
          int x;
-         cin >> x;
+         cin>>x;
          buildTree(root, x);
       }
-      int cnt = 0;
-      sol(root, cnt);
-      cout << cnt << "\n";
+      preOrder(root);
+      cout << "\n";
    }
    return 0;
 }

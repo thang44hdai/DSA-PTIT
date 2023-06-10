@@ -19,17 +19,25 @@ void buildTree(node &root, int l, int r, int a[])
     if (l > r)
         return;
     int mid = (l + r) / 2;
-    root = new Node(a[mid]);
+    root = new Node(a[(l + r) / 2]);
     buildTree(root->left, l, mid - 1, a);
     buildTree(root->right, mid + 1, r, a);
 }
-void preOrder(node root)
+bool check_leaf(node root)
+{
+    return (root->left == NULL and root->right == NULL);
+}
+int cnt = 0;
+void cnt_leaf(node root)
 {
     if (root)
     {
-        cout << root->val << " ";
-        preOrder(root->left);
-        preOrder(root->right);
+        if (check_leaf(root))
+            cnt++;
+        if (root->left)
+            cnt_leaf(root->left);
+        if (root->right)
+            cnt_leaf(root->right);
     }
 }
 int main()
@@ -49,8 +57,9 @@ int main()
         sort(a, a + n);
         node root = NULL;
         buildTree(root, 0, n - 1, a);
-        preOrder(root);
-        cout << "\n";
+        cnt = 0;
+        cnt_leaf(root);
+        cout << cnt << "\n";
     }
     return 0;
 }

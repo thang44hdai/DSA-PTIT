@@ -26,23 +26,7 @@ void buildTree(node &root, int x)
             buildTree(root->right, x);
     }
 }
-int levelOrder(node root)
-{
-    queue<pair<node, int>> q;
-    q.push({root, 0});
-    int cnt = -1;
-    while (q.size())
-    {
-        auto top = q.front();
-        q.pop();
-        cnt = max(cnt, top.second);
-        if (top.first->left)
-            q.push({top.first->left, top.second + 1});
-        if (top.first->right)
-            q.push({top.first->right, top.second + 1});
-    }
-    return cnt;
-}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -61,7 +45,7 @@ int main()
             cin >> x;
             buildTree(root, x);
         }
-        cout << levelOrder(root) << "\n";
+        
     }
     return 0;
 }

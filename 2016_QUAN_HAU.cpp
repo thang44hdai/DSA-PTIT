@@ -13,7 +13,7 @@ void Try(int i = 1)
         cnt++;
         return;
     }
-    for (int j = 1; j <= n; j++) // xét các hàng
+    for (int j = 1; j <= n; j++) // xét các cột
     {
         if (!a[j] and !b[i + j - 1] and !c[i - j + n])
         {

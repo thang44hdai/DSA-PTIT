@@ -17,18 +17,16 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    
+
     int n;
     cin >> n;
     string s[n + 6];
     cin.ignore();
     vector<int> ans;
     for (int i = 0; i < n; i++)
-    {
         getline(cin, s[i]);
-    }
+
     for (int i = 0; i < n; i++)
-    {
         if (soTu(s[i]) == 7)
         {
             ans.push_back(2);
@@ -41,7 +39,7 @@ int main()
                 i++;
             i--;
         }
-    }
+
     cout << ans.size() << endl;
     for (int i : ans)
         cout << i << endl;

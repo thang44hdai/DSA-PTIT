@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -30,10 +31,11 @@ int main()
             mp[n] = 1;
         vector<pair<ll, ll>> vt;
         for (auto i : mp)
-            vt.push_back({i.second, i.first});
-        sort(vt.begin(), vt.end(), greater<>());
+            vt.push_back({i.first, i.second});
+
         for (auto i : vt)
-            cout << i.second << " " << i.second << "\n";
+            cout << i.first << " " << i.second << "\n";
+        cout << "\n";
     }
     return 0;
 }

@@ -1,0 +1,1 @@
+{"name":"Local: thu_gon_day_so","url":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\hello\\thu_gon_day_so.cpp","tests":[{"id":1690091020678,"input":"5\n2 3 4 5 6","output":"10\n1 5 5 8 6 4 3 5 9 3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\84395\\Documents\\GitHub\\DSA-PTIT\\hello\\thu_gon_day_so.cpp","group":"local","local":true}

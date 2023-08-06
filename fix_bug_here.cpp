@@ -1,39 +1,28 @@
-#include <bits/stdc++.h>
-#define ll long long
-using namespace std;
+#include <iostream>
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
     int t;
-    cin >> t;
+    std::cin >> t;
     while (t--)
     {
-        ll n;
-        cin >> n;
-        map<ll, ll> mp;
-        for (ll i = 2; i <= sqrt(n); i++)
+        int n, k, ans = 0;
+        std::cin >> n >> k;
+        for (int i = n / 2; i <= n; i++)
         {
-            if (n % i == 0)
+            int cnt = 1, j = i, pre = n;
+            while (j <= pre)
             {
-                ll cnt = 0;
-                while (n % i == 0)
-                {
-                    cnt++;
-                    n /= i;
-                }
-                mp[i] = cnt;
+                cnt++;
+                int tmp = j;
+                j = pre - j;
+                pre = tmp;
+            }
+            if (cnt >= k)
+            {
+                ans++;
             }
         }
-        if (n > 1)
-            mp[n] = 1;
-        vector<pair<ll, ll>> vt;
-        for (auto i : mp)
-            vt.push_back({i.second, i.first});
-        sort(vt.begin(), vt.end(), greater<>());
-        for (auto i : vt)
-            cout << i.second << " " << i.second << "\n";
+        std::cout << ans << '\n';
     }
     return 0;
 }

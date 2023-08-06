@@ -36,7 +36,6 @@ int main()
         }
         chiphi += pq1.top() - pq2.top();
         pq.push(y);
-        //cout<<pq.size()<<" "<<chiphi<<" ";
     }
     cout << pq.top()<<"\n" << chiphi;
     return 0;

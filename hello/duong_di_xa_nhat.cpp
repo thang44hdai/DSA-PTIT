@@ -4,30 +4,27 @@ using namespace std;
 #define ll long long
 
 int n;
-vector<pair<int, int>> ke[100005];
-priority_queue<pair<int, int>> pq;
+vector<int> ke[100005];
 
-int dijkstra(int u)
+int ok[100005]={};
+int res = 0;
+int point;
+void dfs(int u, int cnt)
 {
-    int d[100005] = {};
-    d[u] = 0;
-    pq.push({0, u});
-    while (pq.size())
+    if (cnt > res)
     {
-        auto top = pq.top();
-        pq.pop();
-        if (top.first < d[top.second])
-            continue;
-        for (auto i : ke[top.second])
+        res = cnt;
+        point = u;
+    }
+    for (int x : ke[u])
+    {
+        if (!ok[x])
         {
-            if (d[i.second] < d[top.second] + i.first)
-            {
-                d[i.second] = d[top.second] + i.first;
-                pq.push({d[i.second], i.second});
-            }
+            ok[x] = 1;
+            dfs(x, cnt + 1);
+            ok[x] = 0;
         }
     }
-    return *max_element(d, d + n + 5);
 }
 
 int main()
@@ -40,13 +37,12 @@ int main()
     {
         int x, y;
         cin >> x >> y;
-        ke[x].push_back({1, y});
+        ke[x].push_back(y);
+        ke[y].push_back(x);
     }
-    int ans = -1;
-    for (int i = 1; i <= n; i++)
-    {
-        ans = max(ans, dijkstra(i));
-    }
-    cout << ans;
+    dfs(1, 0);
+    res = 0;
+    dfs(point, 0);
+    cout << res;
     return 0;
 }
